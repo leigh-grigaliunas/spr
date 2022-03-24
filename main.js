@@ -8,18 +8,13 @@ const getUserChoice = userInput => {
   }
   
 function getComputerChoice(){
-    switch (Math.floor(Math.random() * 3)) {
-        case 0:
+    let choice = Math.floor(Math.random() * 3);
+    if (choice === 0 ){
         return 'rock';
-        break;
-        case 1:
+    } else if (choice === 1){
         return 'paper';
-        break;
-        case 2:
+    } else {
         return 'scissors';
-        break;
-        default:
-        break;
     }
 }
   
@@ -29,32 +24,15 @@ function determineWinner(userChoice,computerChoice){
     let lose = 'You lose :-('
     let draw = 'You tie :-/'
 
-    if (userChoice === 'rock'){
-        if (computerChoice === 'scissors'){
+    if ((userChoice === 'rock' && computerChoice === 'scissors') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'scissors' && computerChoice === 'paper')){
         result = win;
-        } else if (computerChoice === 'paper') {
+    } else if ((computerChoice === 'rock' && userChoice === 'scissors') || (computerChoice === 'paper' && userChoice === 'rock') || (computerChoice === 'scissors' && userChoice === 'paper')){ 
         result = lose;
-        } else {
-        result = draw;
-        }
-    } else if (userChoice === 'paper'){
-        if (computerChoice === 'rock'){
-        result = win;
-        } else if (computerChoice === 'scissors') {
-        result = lose;
-        } else {
-        result = draw; 
-        }  
     } else {
-        if (computerChoice === 'paper'){
-            result = win;
-        } else if (computerChoice === 'rock') {
-            result = lose;
-        } else {
-            result = draw;      
-        }
+        result = draw;
     }
+
     return `You have ${userChoice} and computer had ${computerChoice} - ${result}`
 }
 
-console.log(determineWinner(getUserChoice('rock'),getComputerChoice()));
+console.log(determineWinner(getUserChoice('paper'),getComputerChoice()));
