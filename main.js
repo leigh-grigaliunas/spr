@@ -1,6 +1,6 @@
 const getUserChoice = userInput => {
     userInput = userInput.toLowerCase();
-    if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
+    if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors' || userInput === 'bomb') {
       return userInput; 
     } else {
       return userInput + ' is not a valid response. Please try again.'
@@ -28,11 +28,18 @@ function determineWinner(userChoice,computerChoice){
         result = win;
     } else if ((computerChoice === 'rock' && userChoice === 'scissors') || (computerChoice === 'paper' && userChoice === 'rock') || (computerChoice === 'scissors' && userChoice === 'paper')){ 
         result = lose;
-    } else {
+    } else if (userChoice === 'bomb') { 
+        result = "well played, you win out of principle!"
+    }else {
         result = draw;
     }
 
     return `You have ${userChoice} and computer had ${computerChoice} - ${result}`
 }
 
-console.log(determineWinner(getUserChoice('paper'),getComputerChoice()));
+function playGame() {
+    console.log(determineWinner(getUserChoice('BOMB'),getComputerChoice()));
+  }
+  
+  playGame();
+  
